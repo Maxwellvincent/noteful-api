@@ -7,8 +7,8 @@ const queries = require('../db/queries');
 const notesRouter = express.Router();
 
 // Validation of note has to have a title folder select
-function validNote(note){
-    const noteTitle = typeof note.name == 'string' && note.title.trim() != "";
+function validNote(notes){
+    const noteTitle = typeof notes.name == 'string';
     
 }
 
@@ -26,15 +26,16 @@ notesRouter.get('/:id',queries.isValidId, (req,res,next) => {
 
 
 notesRouter.post('/', (req,res, next) => {
-   
-    if(validNote(req.body)) {
-        // inset into db
-        queries.createNote(req.body).then(note => {
-            res.json(note);
-        })
-    }else {
-        next(new Error('Invalid note'));
-    }
+    queries.createNote(req.body).then(note => {
+        res.json(note);
+    });
+
+    // if(validNote(req.body)) {
+    //     // inset into db
+        
+    // }else {
+    //     next(new Error('Invalid note'));
+    // }
 });
 
 module.exports = notesRouter;

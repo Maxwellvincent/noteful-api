@@ -7,9 +7,9 @@ const foldersRouter = express.Router();
 //     next(new Error('Invalid ID'))
 // }
 
-function validFolder(folder){
-    const folderTitle = typeof folder.name === 'string';
-}
+// function validFolder(folders){
+//     const folderTitle = typeof folders.name === 'string';
+// }
 
 foldersRouter.get('/', (req,res,next) => {
     queries.getAllFolders().then(folders => {
@@ -34,14 +34,17 @@ foldersRouter.get('/:id',queries.isValidId, (req,res,next) => {
 
 foldersRouter.post('/', (req, res, next) => {
     console.log(req.body);
-    if(validFolder(req.body)) {
-        // inset into db
-        queries.createFolder(req.body).then(folder => {
-            res.json(folder[0]);
-        })
-    }else {
-        next(new Error('invalid Folder'));
-    }
+    queries.createFolder(req.body).then(folder => {
+        res.json(folder[0]);
+    })
+    // if(validFolder(req.body)) {
+    //     // inset into db
+    //     queries.createFolder(req.body).then(folder => {
+    //         res.json(folder[0]);
+    //     })
+    // }else {
+    //     next(new Error('invalid Folder'));
+    // }
 });
 
 

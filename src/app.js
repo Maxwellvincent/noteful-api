@@ -6,7 +6,7 @@ const helmet = require('helmet')
 const { NODE_ENV } = require('./config')
 const foldersRouter = require('../api/folders');
 const notesRouter = require('../api/notes')
-
+const bodyParser = require('body-parser');
 
 const app = express()
 
@@ -14,12 +14,17 @@ const morganOption = (NODE_ENV === 'production')
     ? 'tiny'
     : 'common';
 
+
+// Have to use bodyParser when send POST request, and it has to be called earlier!
+
+app.use(bodyParser.json());
 app.use(morgan(morganOption))
 app.use(helmet())
 app.use(cors())
 
+
 app.use('/notes',notesRouter);
-app.use('folders',foldersRouter);
+app.use('/folders',foldersRouter);
 
 app.use('/api/v1/folders',foldersRouter);
 app.use('/api/v1/notes',notesRouter);
