@@ -14,5 +14,9 @@ module.exports = {
       directory: './seeds'
     }
   },
+  test: {
+    client: 'pg',
+    connection: "postgres://localhost/test-noteful-server",
+  }
 
 };
