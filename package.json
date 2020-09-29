@@ -7,6 +7,7 @@
     "test": "(dropdb --if-exists test-noteful-server && createdb test-noteful-server) &&  mocha --require test/setup.js",
     "dev": "nodemon src/server.js",
     "start": "node src/server.js",
+    "migrate:production": "heroku run knex migrate",
     "predeploy": "npm audit",
     "deploy": "git push heroku master"
   },
