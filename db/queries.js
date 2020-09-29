@@ -26,6 +26,19 @@ module.exports = {
     },
     createFolder(folder){
         return knex('folders').insert(folder, '*');
+    },
+    updateFolder(id, folder){
+        return knex('folders').where('id', id).update(folder,"*");
+    },
+    updateNote(id, note){
+        //"*" returns all rows of data information
+        return knex('notes').where('id', id).update(note,"*");
+    },
+    deleteFolder(id){
+        return knex('folders').where('id',id).delete();
+    },
+    deleteNote(id){
+        return knex('notes').where('id',id).delete();
     }
 
 }

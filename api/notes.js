@@ -1,4 +1,5 @@
 const express = require('express');
+const { isValidId } = require('../db/queries');
 //These bring in the methods to CRUD
 const queries = require('../db/queries');
 
@@ -36,6 +37,20 @@ notesRouter.post('/', (req,res, next) => {
     // }else {
     //     next(new Error('Invalid note'));
     // }
+});
+
+notesRouter.put('/:id', queries.isValidId, (req, res, next) => {
+    queries.updateNote(req.params.id, req.body).then(note => {
+        res.json(note[0]);
+    });
+});
+
+notesRouter.delete('/:id', queries.isValidId, (req, res, next) => {
+    queries.deleteNote(req.params.id).then(() => {
+        res.json({
+            deleted: true
+        });
+    });
 });
 
 module.exports = notesRouter;

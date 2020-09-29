@@ -36,7 +36,7 @@ foldersRouter.post('/', (req, res, next) => {
     console.log(req.body);
     queries.createFolder(req.body).then(folder => {
         res.json(folder[0]);
-    })
+    });
     // if(validFolder(req.body)) {
     //     // inset into db
     //     queries.createFolder(req.body).then(folder => {
@@ -47,6 +47,21 @@ foldersRouter.post('/', (req, res, next) => {
     // }
 });
 
+foldersRouter.put('/:id', queries.isValidId, (req, res, next) => {
+ //Is valid checks the id and makes sure its an id that is in the table
+    queries.updateFolder(req.params.id, req.body).then(folder => {
+        // Not getting anything in return here?
+        res.json(folder[0]);
+    })
+});
+
+foldersRouter.delete('/:id', queries.isValidId,(req, res, next) => {
+    queries.deleteFolder(req.params.id).then(() => {
+        res.json({
+            deleted: true
+        });
+    });
+});
 
     
 
