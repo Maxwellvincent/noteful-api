@@ -6,7 +6,11 @@ module.exports = {
 
   development: {
     client: 'pg',
-    connection: "postgres://localhost/noteful-server",
+    connection: {
+      host: "postgres://localhost/noteful-server",
+      timezone: 'UTC',
+      dateStrings: true
+    },
     migrations: {
       directory: './migrations'
     },
