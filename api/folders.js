@@ -1,7 +1,7 @@
 const express = require('express');
 const queries = require('../db/queries');
 const foldersRouter = express.Router();
-
+const cors = require('cors');
 // function isValidId(req,res,next){
 //     if(!isNaN(req.params.id)) return next();
 //     next(new Error('Invalid ID'))
@@ -11,7 +11,7 @@ const foldersRouter = express.Router();
 //     const folderTitle = typeof folders.name === 'string';
 // }
 
-foldersRouter.get('/', (req,res,next) => {
+foldersRouter.get('/', cors(), (req,res,next) => {
     queries.getAllFolders().then(folders => {
         res.json(folders);
     })

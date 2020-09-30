@@ -23,11 +23,11 @@ app.use(helmet())
 app.use(cors())
 
 
-app.use('/notes',notesRouter);
-app.use('/folders',foldersRouter);
+app.use('/notes', cors(), notesRouter);
+app.use('/folders',cors(), foldersRouter);
 
-app.use('/api/v1/folders',foldersRouter);
-app.use('/api/v1/notes',notesRouter);
+app.use('/api/v1/folders',cors (), foldersRouter);
+app.use('/api/v1/notes',cors(), notesRouter);
 
 app.use(function errorHandler(error, req, res, next) {
     let response;
