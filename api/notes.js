@@ -2,7 +2,7 @@ const express = require('express');
 const { isValidId } = require('../db/queries');
 //These bring in the methods to CRUD
 const queries = require('../db/queries');
-
+const cors = require('cors');
 // Here we created a notesRouter which we can use in the app.js, will need to export it
 
 const notesRouter = express.Router();
@@ -27,6 +27,10 @@ notesRouter.get('/:id',queries.isValidId, (req,res,next) => {
 
 
 notesRouter.post('/', (req,res, next) => {
+    res.header("Access-Control-Allow-Origin", '*');
+    res.header("Access-Control-Allow-Credentials", true);
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
     queries.createNote(req.body).then(note => {
         res.json(note);
     });

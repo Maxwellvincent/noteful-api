@@ -24,7 +24,7 @@ app.use(cors())
 
 
 app.use('/notes', cors(), notesRouter);
-app.use('/folders',cors(), foldersRouter);
+app.use('/folders', cors(), foldersRouter);
 
 app.use('/api/v1/folders',cors (), foldersRouter);
 app.use('/api/v1/notes',cors(), notesRouter);
