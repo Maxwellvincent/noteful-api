@@ -22,7 +22,7 @@ app.use(morgan(morganOption))
 app.use(helmet())
 app.use(cors())
 
-
+app.use('/note', cors(), notesRouter);
 app.use('/notes', cors(), notesRouter);
 app.use('/folders', cors(), foldersRouter);
 
